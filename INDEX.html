@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Dr Sneha ✨</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --accent: #ff75c3; --bg: #05070a; }
+        
+        body {
+            margin: 0; padding: 0; 
+            background: var(--bg);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow: hidden;
+            transition: background 3s ease; /* Smooth transition */
+        }
+
+        /* Romantic Gradient Class */
+        .romantic-bg {
+            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 30%, #831843 100%) !important;
+        }
+
+        /* 🎈 Balloons */
+        .balloons { position: absolute; top: -150px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 5; transition: 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .balloon { width: 45px; height: 55px; border-radius: 50%; animation: bob 4s ease-in-out infinite; position: relative; }
+        .balloon::after { content: ''; position: absolute; width: 1px; height: 80px; background: rgba(255,255,255,0.3); bottom: -80px; left: 50%; }
+        .b1 { background: #ff4d6d; } .b2 { background: #ff75c3; animation-delay: 0.2s; } .b3 { background: #70d6ff; animation-delay: 0.4s; }
+
+        @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* 🌹 Falling Petals */
+        .petal { position: absolute; width: 15px; height: 15px; background: #fb7185; border-radius: 50% 0 50% 50%; animation: fall linear infinite; z-index: 2; pointer-events: none; }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* 🍫 Chocolate */
+        #chocolate { 
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            width: 160px; height: 100px; 
+            background: #4a2c2a; border: 4px solid #d4af37; border-radius: 10px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            z-index: 100; transition: 0.8s ease;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .choc-grid { width: 80%; height: 60%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+        .choc-piece { background: #3d2422; border-radius: 2px; }
+
+        /* Message Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 35px;
+            padding: 45px; width: 85%; max-width: 480px;
+            text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            visibility: hidden; opacity: 0; transition: 1.5s ease; z-index: 10;
+        }
+        .show-card { visibility: visible; opacity: 1; transform: translateY(-20px); }
+
+        h1 { font-family: 'Georgia', serif; font-style: italic; font-size: 2.2rem; color: #fff; text-shadow: 0 0 10px var(--accent); }
+        #typewriter { font-size: 1.1rem; line-height: 1.8; color: #f1f5f9; text-align: left; margin: 20px 0; font-family: 'Segoe UI', sans-serif; font-weight: 300; }
+
+        .start-btn { background: white; color: #000; border: none; padding: 20px 50px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 10px 30px rgba(255,255,255,0.2); transition: 0.3s; }
+        .start-btn:hover { background: var(--accent); color: white; transform: scale(1.1); }
+    </style>
+</head>
+<body id="body">
+
+<button class="start-btn" id="btn" onclick="go()">Open Your Gift, MS DR🫰🏻</button>
+
+<div class="balloons" id="balloons">
+    <div class="balloon b1"></div><div class="balloon b2"></div><div class="balloon b3"></div>
+</div>
+
+<div id="chocolate">
+    <div class="choc-grid">
+        <div class="choc-piece"></div><div class="choc-piece"></div><div class="choc-piece"></div>
+        <div class="choc-piece"></div><div class="choc-piece"></div><div class="choc-piece"></div>
+    </div>
+    <small style="color: #d4af37; margin-top: 5px; font-weight: bold;">FOR YOU 🍫</small>
+</div>
+
+<div class="glass-card" id="card">
+    <div style="color: var(--accent); font-weight: bold; margin-bottom: 10px;">Happy Birthday! 🎂</div>
+    <h1>Sneha ❤️</h1>
+    <div id="typewriter"></div>
+</div>
+
+<script>
+    const text = "Happy Birthday my mahila mitre… 🌝❤️ saralife hasi khusi thak onk moja kor… porasona chape akhn hoito amader daily kotha hoi na… majhe moddhe aktu jhogra koris amr sathe... ay vbe chup chap toke bhalo lge na..sudhu ignore ta aktu kom koris… nijer sob sopno puron korbi🫰🏻🌝 saralife any kharap bhlo sob situation a amk tor pase pabi❤️ You are my strong best friend❤️ dekhte dekhte 3te bochr hoi galo.. saralife theke jas ay vbei🥺🫂 take love forever.🫶🏻❣️";
+    
+    function go() {
+        document.getElementById('btn').style.display = 'none';
+        
+        // 1. Show Chocolate
+        const choc = document.getElementById('chocolate');
+        choc.style.transform = "translate(-50%, -50%) scale(1.2)";
+        
+        // 2. Start Effects
+        startPetals();
+        document.getElementById('balloons').style.top = "20px";
+
+        // 3. Transition to Message
+        setTimeout(() => {
+            choc.style.transform = "translate(-50%, -50%) scale(0)";
+            document.getElementById('body').classList.add('romantic-bg');
+            document.getElementById('card').classList.add('show-card');
+            
+            // Confetti Blast
+            confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 }, colors: ['#ff75c3', '#ffffff', '#fb7185'] });
+            
+            // Start Typewriter
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    document.getElementById('typewriter').innerHTML += text.charAt(i);
+                    i++; setTimeout(type, 45);
+                }
+            }
+            setTimeout(type, 1000);
+        }, 2500);
+    }
+
+    function startPetals() {
+        setInterval(() => {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.innerHTML = "🌹"; // Mix of roses and petals
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            petal.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 7000);
+        }, 200);
+    }
+</script>
+</body>
+</html>
